@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PDC03MOD05.MainPage" Title="Forms and Settings">
+
+    <StackLayout>
+        <Switch x:Name="actionSwitch" IsToggled="True" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="OnAndOffState">
+                    <VisualState x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor"
+                                    Value="Red"/>
+                            <Setter Property="OnColor"
+                                    Value="Blue"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor"
+                                    Value="Black"/>
+                            <Setter Property="OnColor"
+                                    Value="Yellow"/>
+                        </VisualState.Setters>
+
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Switch>
+
+        <Label Text="OFF" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label"
+                             Binding="{Binding Source={x:Reference actionSwitch}, 
+                             Path=IsToggled}" Value="true">
+                    <Setter Property="Text"
+                            Value="ON"/>
+                    <Setter Property="TextColor"
+                            Value="Red"/>
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+
+        <Entry IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry"
+                     Binding="{Binding Source={x:Reference actionSwitch}, 
+                     Path=IsToggled}" Value="true">
+                    <Setter Property="IsEnabled"
+                    Value="True"/>
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+
+        <Picker Title="Animals"
+                TitleColor="Red" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Dog</x:String>
+                    <x:String>Cat</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <DatePicker Format="D" DateSelected="OnDateSelected"
+                    x:Name="birthDatePicker"/>
+        <Label x:Name="result" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+    </StackLayout>
+
+</ContentPage>
